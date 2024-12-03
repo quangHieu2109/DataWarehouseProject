@@ -1,7 +1,8 @@
 {
-  "control": {"ip": "localhost","port": 3306 , "dbname": "control", "username": "root", "password": ""},
-  "staging": {"ip": "localhost","port": 3306 , "dbname": "staging", "username": "root", "password": ""},
-  "data_warehouse": {"ip": "localhost","port": 3306 , "dbname": "data_warehouse", "username": "root", "password": ""}
+  "control": {"ip": "localhost","port": 3306 , "dbname": "control", "username": "root", "password": "giang280403"},
+  "staging": {"ip": "localhost","port": 3306 , "dbname": "staging", "username": "root", "password": "giang280403"},
+  "data_warehouse": {"ip": "localhost","port": 3306 , "dbname": "data_warehouse", "username": "root", "password": "giang280403"},
+  "data_mart": {"ip": "localhost","port": 3306 , "dbname": "data_warehouse", "username": "root", "password": "giang280403"}
 
 
 }

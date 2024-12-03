@@ -8,14 +8,15 @@ import java.io.*;
 
 public class Connections {
     private static JSONObject fileConfig;
-    private static Jdbi controlJDBI, stagingJDBI, dwJDBI;
-    public static void loadFileConfig(){
-        try{
-            if(fileConfig ==null){
+    private static Jdbi controlJDBI, stagingJDBI, dwJDBI, martJDBI;
+
+    public static void loadFileConfig() {
+        try {
+            if (fileConfig == null) {
                 BufferedReader br = new BufferedReader(new FileReader(new File("Staging/config.json")));
-                String fileContent="";
+                String fileContent = "";
                 String in;
-                while((in = br.readLine())!= null){
+                while ((in = br.readLine()) != null) {
                     fileContent += in;
                 }
                 fileConfig = new JSONObject(fileContent);
@@ -24,13 +25,14 @@ public class Connections {
             throw new RuntimeException(e);
         }
     }
-    public static Jdbi getControlJDBI(){
+
+    public static Jdbi getControlJDBI() {
 
         try {
             loadFileConfig();
-            if(controlJDBI == null ){
+            if (controlJDBI == null) {
                 JSONObject jsonControl = fileConfig.getJSONObject("control");
-//        System.out.println(jsonControl.getString("ip"));
+                // System.out.println(jsonControl.getString("ip"));
                 String dbConnect = String.format("jdbc:mysql://%s:%s/%s", jsonControl.getString("ip"),
                         jsonControl.getInt("port"), jsonControl.getString("dbname"));
                 controlJDBI = Jdbi.create(dbConnect, jsonControl.getString("username"),
@@ -40,15 +42,16 @@ public class Connections {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    return controlJDBI;
+        return controlJDBI;
     }
-    public static Jdbi getStagingJDBI(){
+
+    public static Jdbi getStagingJDBI() {
 
         try {
             loadFileConfig();
-            if(stagingJDBI == null ){
+            if (stagingJDBI == null) {
                 JSONObject jsonControl = fileConfig.getJSONObject("staging");
-//        System.out.println(jsonControl.getString("ip"));
+                // System.out.println(jsonControl.getString("ip"));
                 String dbConnect = String.format("jdbc:mysql://%s:%s/%s", jsonControl.getString("ip"),
                         jsonControl.getInt("port"), jsonControl.getString("dbname"));
                 stagingJDBI = Jdbi.create(dbConnect, jsonControl.getString("username"),
@@ -60,13 +63,14 @@ public class Connections {
         }
         return stagingJDBI;
     }
-    public static Jdbi getdwJDBI(){
+
+    public static Jdbi getdwJDBI() {
 
         try {
             loadFileConfig();
-            if(dwJDBI == null ){
+            if (dwJDBI == null) {
                 JSONObject jsonControl = fileConfig.getJSONObject("data_warehouse");
-//        System.out.println(jsonControl.getString("ip"));
+                // System.out.println(jsonControl.getString("ip"));
                 String dbConnect = String.format("jdbc:mysql://%s:%s/%s", jsonControl.getString("ip"),
                         jsonControl.getInt("port"), jsonControl.getString("dbname"));
                 dwJDBI = Jdbi.create(dbConnect, jsonControl.getString("username"),
@@ -77,6 +81,25 @@ public class Connections {
             throw new RuntimeException(e);
         }
         return dwJDBI;
+    }
+
+    public static Jdbi getMartJDBI() {
+
+        try {
+            loadFileConfig();
+            if (martJDBI == null) {
+                JSONObject jsonControl = fileConfig.getJSONObject("data_mart");
+                // System.out.println(jsonControl.getString("ip"));
+                String dbConnect = String.format("jdbc:mysql://%s:%s/%s", jsonControl.getString("ip"),
+                        jsonControl.getInt("port"), jsonControl.getString("dbname"));
+                dwJDBI = Jdbi.create(dbConnect, jsonControl.getString("username"),
+                        jsonControl.getString("password"));
+                dwJDBI.installPlugin(new SqlObjectPlugin());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return martJDBI;
     }
 
 }
