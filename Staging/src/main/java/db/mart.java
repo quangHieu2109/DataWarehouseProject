@@ -9,7 +9,7 @@ public class Mart {
     public static void calculateDailyIncome(String targetDate, long targetId, long targetIdProduct) {
         String sql = "SELECT COALESCE(SUM(discountPercent), 0) AS totalDiscount " +
                      "FROM data_warehouse.data_tivi " +
-                     "WHERE source_id = :targetId AND product_id = :targetIdProduct AND DATE(created_at) = :targetDate";
+                     "WHERE source_id = :targetId AND product_id = :targetIdProduct AND DATE(expired) = :targetDate";
 
         martJDBI.useHandle(handle -> {
             Query query = handle.createQuery(sql);
@@ -24,6 +24,6 @@ public class Mart {
 
     public static void main(String[] args) {
         // Example call to the method
-        calculateDailyIncome("2024-10-01", 1, 1);
+        calculateDailyIncome("9999-12-30", 1, 272080);
     }
 }
