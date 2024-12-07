@@ -19,6 +19,6 @@ public class Main {
         LoadFileToDB.loadData();
         LoadStagingToDW.loadDMXData();
         LoadStagingToDW.loadNKData();
-        LoadDWToMảt.loadDWToMart();
+        LoadDWToMart.loadDWToMart();
     }
 }

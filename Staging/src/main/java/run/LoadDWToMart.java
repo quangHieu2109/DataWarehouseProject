@@ -6,7 +6,6 @@ import org.jdbi.v3.core.Jdbi;
 public class LoadDWToMart {
     private static Jdbi martJDBI = Connections.getMartJDBI();
 
-
     public static void loadDWToMart() {
         String sql = "CALL loadDWToMart()";
         martJDBI.withHandle(handle -> {
