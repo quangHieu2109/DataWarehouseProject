@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `data_tivi` (
   `soundTechnology` varchar(255) DEFAULT '',
   `memory` varchar(255) DEFAULT '',
   `voiceSearch` varchar(255) DEFAULT '',
-  `crawlDate` date DEFAULT curdate(),
+  `crawlDate` date ,
   `expired` date DEFAULT '9999-12-30',
   `isDelete` int(11) DEFAULT 0,
   `deleteTime` datetime DEFAULT NULL,
@@ -8376,7 +8376,7 @@ CREATE TABLE IF NOT EXISTS `file_config` (
   `address` varchar(255) NOT NULL DEFAULT '',
   `file_location` varchar(255) NOT NULL DEFAULT '',
   `staging_table` varchar(255) NOT NULL DEFAULT '',
-  `createdAt` date NOT NULL DEFAULT curdate(),
+  `createdAt` date NOT NULL  ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
